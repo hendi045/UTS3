@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Situs Berita Global</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="fas fa-globe-americas me-2"></i>Berita Global
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Terbaru</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Topik</a></li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input id="searchInput" class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
+          <button class="btn btn-light" type="button" onclick="filterNews()">Cari</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container my-4">
+  <section id="news-section">
+    <div class="row" id="newsContainer">
+      <!-- Kartu berita dimuat di sini -->
+    </div>
+  </section>
+</main>
+
+<footer class="bg-primary text-white text-center py-3 mt-5">
+  <p>© 2025 Situs Berita | Udin Cuy</p>
+  <div>
+    <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

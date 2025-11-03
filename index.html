@@ -1,213 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: #f2f2f2;
-      color: #333;
-    }
-
-    .navbar {
-      background: #0d6efd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      color: white;
-    }
-
-    .navbar .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .navbar a:hover {
-      color: #ffc107;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 30px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 15px;
-    }
-
-    .card-body h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: #0d6efd;
-    }
-
-    .card-body p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .card-body a {
-      display: inline-block;
-      padding: 8px 12px;
-      background: #0d6efd;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .card-body a:hover {
-      background: #0b5ed7;
-    }
-
-    .footer {
-      text-align: center;
-      background: #0d6efd;
-      color: white;
-      padding: 15px;
-      margin-top: 40px;
-    }
-
-    .loading {
-      text-align: center;
-      grid-column: 1 / -1;
-      font-size: 1.2rem;
-      color: #0d6efd;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Berita Global</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJd4S8z+3I4mSj/J5K+2h6QeRz0J0z4l5P1u3w0E3s/S6N4jF6G1H8N9I1p6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white fw-bold" href="#"><i class="fas fa-globe-americas me-2"></i>Berita Global</a>
+            
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="#" onclick="fetchNews()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Terbaru</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Topik</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#" data-topic="technology">Teknologi</a></li>
+                            <li><a class="dropdown-item" href="#" data-topic="business">Bisnis</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" data-topic="">Semua</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <form class="d-flex" id="search-form">
+                    <input class="form-control me-2" type="search" placeholder="Cari Artikel..." aria-label="Search" id="search-input">
+                    <button class="btn btn-outline-light custom-search-btn" type="submit">Cari</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
-  <nav class="navbar">
-    <div class="logo">NewsPortal</div>
-    <ul>
-      <li><a href="#" data-category="general">Home</a></li>
-      <li><a href="#" data-category="business">Business</a></li>
-      <li><a href="#" data-category="technology">Technology</a></li>
-      <li><a href="#" data-category="sports">Sports</a></li>
-      <li><a href="#" data-category="entertainment">Entertainment</a></li>
-    </ul>
-  </nav>
+    <div class="container my-5">
+        <h6 class="text-center mb-4 display-5 custom-title" id="main-title">Berita Hari ini</h6>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="news-container">
+            <div class="col-12 text-center">
+                <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <p class="text-muted mt-2">Nunggu berita datang...</p>
+            </div>
+        </div>
+        
+        <div id="no-news-message" class="text-center mt-5" style="display: none;">
+            <p class="lead">Gak nemu artikel nih, coba kata kunci lain.</p>
+        </div>
+    </div>
 
-  <div class="container"></div>
+    <footer class="footer mt-auto py-3 custom-footer">
+        <div class="container text-center">
+            <p class="mb-0 text-white">&copy; 2025 Situs Berita | Udin Cuy</p>
+        </div>
+    </footer>
 
-  <footer class="footer">
-    <p>&copy; 2025 NewsPortal. All Rights Reserved.</p>
-  </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-  <script>
-    const container = document.querySelector('.container');
+    <script>
+        const newsContainer = document.getElementById('news-container');
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const mainTitle = document.getElementById('main-title');
+        const noNewsMessage = document.getElementById('no-news-message');
 
-    async function loadNews(category = "general") {
-      container.innerHTML = "<p class='loading'>Loading news...</p>";
+        const fetchNews = (query = '', category = '') => {
+            
+            newsContainer.innerHTML = `<div class="col-12 text-center my-5"><div class="spinner-border text-primary" role="status"></div><p class="text-muted mt-2">Loading news...</p></div>`;
+            noNewsMessage.style.display = 'none';
+            
+            let url = '/api/news?'; 
+            
+            if (query) {
+                mainTitle.textContent = `Hasil Cari buat "${query}"`;
+                url += `q=${query}`;
+            } else if (category) {
+                mainTitle.textContent = `Berita Utama Topik ${category.charAt(0).toUpperCase() + category.slice(1)} (US)`;
+                url += `category=${category}`;
+            } 
+            else {
+                mainTitle.textContent = 'Berita Utama Hari Ini (US)';
+            }
 
-      try {
-        // Gunakan endpoint proxy agar API key tetap aman (handled di Vercel backend)
-        const res = await fetch(`/api/proxy?category=${category}`);
-        const data = await res.json();
-        container.innerHTML = "";
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        // Jika Vercel Serverless Function gagal (Error 500)
+                        throw new Error(`Error HTTP: ${response.status}. Cek Runtime Logs Vercel.`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Cek jika NewsAPI mengembalikan error (misalnya API Key Invalid)
+                    if (data.status === 'error') {
+                         throw new Error(`NewsAPI Error: ${data.code} - ${data.message}`);
+                    }
+                    
+                    newsContainer.innerHTML = ""; 
+                    
+                    if (data.articles && data.articles.length > 0) {
+                        data.articles.forEach(article => {
+                            let col = document.createElement('div');
+                            col.classList.add('col');
+                            
+                            const imageUrl = article.urlToImage || 'https://via.placeholder.com/400x250?text=No+Image';
+                            const description = article.description ? article.description.substring(0, 80) + '...' : 'Klik "Baca Selengkapnya" buat detail.';
 
-        if (data.articles && data.articles.length > 0) {
-          data.articles.forEach(article => {
-            const card = `
-              <div class="card">
-                <img src="${article.urlToImage || 'https://via.placeholder.com/400x200'}" alt="news">
-                <div class="card-body">
-                  <h3>${article.title}</h3>
-                  <p>${article.description || 'No description available.'}</p>
-                  <a href="${article.url}" target="_blank">Read more</a>
-                </div>
-              </div>
-            `;
-            container.innerHTML += card;
-          });
-        } else {
-          container.innerHTML = "<p class='loading'>No news found.</p>";
-        }
-      } catch (err) {
-        console.error(err);
-        container.innerHTML = "<p class='loading'>Error loading news.</p>";
-      }
-    }
+                            col.innerHTML = `
+                                <div class="card h-100 shadow-sm custom-card">
+                                    <img class="card-img-top custom-card-img" src="${imageUrl}" alt="News Image" loading="lazy">
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title custom-card-title">${article.title}</h6>
+                                        <p class="card-text flex-grow-1 small">${description}</p>
+                                        <a href="${article.url}" target="_blank" class="btn btn-primary btn-sm mt-auto custom-btn">Baca Selengkapnya</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <small>${article.source ? article.source.name : 'Unknown'}</small>
+                                    </div>
+                                </div>
+                            `;
+                            newsContainer.appendChild(col);
+                        });
+                    } else {
+                        noNewsMessage.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    // Menampilkan pesan error yang lebih detail
+                    newsContainer.innerHTML = `<div class='col-12'><div class='alert alert-danger text-center' role='alert'><i class="fas fa-exclamation-triangle me-2"></i> Gagal memuat. ${error.message}.</div></div>`;
+                });
+        };
 
-    // Default load
-    loadNews();
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                fetchNews(query);
+            }
+        });
+        
+        document.querySelectorAll('.dropdown-menu a').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const topic = item.getAttribute('data-topic');
+                fetchNews('', topic);
+            });
+        });
 
-    // Navbar event listener
-    document.querySelectorAll('.navbar a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const category = e.target.getAttribute('data-category');
-        loadNews(category);
-      });
-    });
-  </script>
-
-  <!-- Simulasi file backend /api/proxy.js -->
-  <script type="module" id="vercel-proxy">
-    // Bagian ini tidak dijalankan di browser, tapi sebagai referensi Vercel backend:
-    
-    import fetch from "node-fetch";
-    export default async function handler(req, res) {
-      const { category = "general" } = req.query;
-      const apiKey = process.env.NEWS_API_KEY;
-      const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}`;
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        res.status(200).json(data);
-      } catch (error) {
-        res.status(500).json({ error: "Failed to fetch API" });
-      }
-    }
-    */
-  </script>
+        fetchNews();
+    </script>
 </body>
 </html>
-
